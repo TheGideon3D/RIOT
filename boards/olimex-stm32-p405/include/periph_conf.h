@@ -146,6 +146,16 @@ static const dac_conf_t dac_config[] = {
  * @{
  */
 static const pwm_conf_t pwm_config[] = {
+    {
+        .dev        = TIM3,
+        .rcc_mask   = RCC_APB1ENR_TIM3EN,
+        .chan       = { { .pin = GPIO_PIN(PORT_B, 4), .cc_chan = 0 },
+                        { .pin = GPIO_PIN(PORT_B, 5), .cc_chan = 1 },
+                        { .pin = GPIO_PIN(PORT_B, 0), .cc_chan = 2 },
+                        { .pin = GPIO_PIN(PORT_B, 1), .cc_chan = 3 } },
+        .af         = GPIO_AF2,
+        .bus        = APB1
+    }
 };
 
 #define PWM_NUMOF           (sizeof(pwm_config) / sizeof(pwm_config[0]))
