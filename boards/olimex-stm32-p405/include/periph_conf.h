@@ -149,13 +149,24 @@ static const pwm_conf_t pwm_config[] = {
     {
         .dev        = TIM3,
         .rcc_mask   = RCC_APB1ENR_TIM3EN,
-        .chan       = { { .pin = GPIO_PIN(PORT_B, 4), .cc_chan = 0 },
+        .chan       = { {}, 
                         { .pin = GPIO_PIN(PORT_B, 5), .cc_chan = 1 },
                         { .pin = GPIO_PIN(PORT_B, 0), .cc_chan = 2 },
-                        { .pin = GPIO_PIN(PORT_B, 1), .cc_chan = 3 } },
+                        { .pin = GPIO_PIN(PORT_B, 1), .cc_chan = 3 },
+                      },
         .af         = GPIO_AF2,
         .bus        = APB1
     }
+    /*,
+    {
+        .dev        = TIM8,
+TODO        .rcc_mask   = RCC_,
+        .chan       = { { .pin = GPIO_PIN(PORT_C, 6), .cc_chan = 1 },
+                        { .pin = GPIO_PIN(PORT_C, 7), .cc_chan = 2 },
+                        { .pin = GPIO_PIN(PORT_C, 8), .cc_chan = 3 },
+                        { .pin = GPIO_PIN(PORT_C, 9), .cc_chan = 4 }
+TODO: complete                        
+                        */
 };
 
 #define PWM_NUMOF           (sizeof(pwm_config) / sizeof(pwm_config[0]))
@@ -176,6 +187,32 @@ static const spi_conf_t spi_config[] = {
  * @{
  */
 static const i2c_conf_t i2c_config[] = {
+    {
+        .dev        = I2C1,
+        .speed      = I2C_SPEED_NORMAL,
+        .scl_pin    = GPIO_PIN(PORT_B, 6),
+        .sda_pin    = GPIO_PIN(PORT_B, 7),
+        .scl_af     = GPIO_AF4,
+        .sda_af     = GPIO_AF4,
+        .bus        = APB1,
+        .rcc_mak    = RCC_APB1ENR_I2C1EN,
+        .clk        = CLOCK_APB1,
+        .irqn       = I2C1_EV_IRQn
+    }
+/* TODO: 
+    {
+        .dev        = I2C2,
+        .speed      = I2C_SPEED_NORMAL,
+        .scl_pin    = GPIO_PIN(PORT_B, 10),
+        .sda_pin    = GPIO_PIN(PORT_B, 11),
+        .scl_af     = GPIO_AF4,
+        .sda_af     = GPIO_AF4,
+        .bus        = APB1,
+        .rcc_mask   = RCC_APB1ENR_I2C2EN,
+        .clk        = CLOCK_APB1,
+        .irqn       = I2C2_EV_IRQn
+    }
+*/
 };
 
 #define I2C_0_ISR           isr_i2c1_ev
